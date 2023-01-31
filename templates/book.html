@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <title>{{ book.title }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+    <div class="header">
+        <a href="{{ url_for('search') }}">Back</a>
+    </div>
+    <div id="book-info-container">
+        <table>
+            <tr>
+                <td>Title:</td>
+                <td>{{ book.title }}</td>
+            </tr>
+            <tr>
+                <td>Author:</td>
+                <td>{{ book.author }}</td>
+            </tr>
+            <tr>
+                <td>Publication Year:</td>
+                <td>{{ book.year }}</td>
+            </tr>
+            <tr>
+                <td>ISBN</td>
+                <td>{{ book.isbn }}</td>
+            </tr>
+        </table>
+    </div>
+</body>

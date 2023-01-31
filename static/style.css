@@ -1,0 +1,40 @@
+ /* Global styling */
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Style search bar and its container */
+#search-bar-container {
+    width: 100%;
+    height: 15vw;
+    border: 1px solid red;
+    display: table;
+}
+
+#search-form {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#search-bar {
+    width: 400px;
+    font-size: 16pt;
+}
+
+#search-button {
+    width: 200px;
+    height: 40px;
+    font-size: 20pt;
+    margin: 5px;
+}
+
+/* Style search results */
+#search-results-container {
+    width: 100%;
+    text-align: center;
+}
+
+li {
+    list-style: none;
+}
