@@ -6,9 +6,10 @@
 <body>
     <div class="header">
         <a href="{{ url_for('search') }}">Back</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
     </div>
     <div id="book-info-container">
-        <table>
+        <table class="book-info">
             <tr>
                 <td>Title:</td>
                 <td>{{ book.title }}</td>
@@ -22,9 +23,33 @@
                 <td>{{ book.year }}</td>
             </tr>
             <tr>
-                <td>ISBN</td>
+                <td>ISBN:</td>
                 <td>{{ book.isbn }}</td>
             </tr>
         </table>
+    </div>
+    <div id="review-input">
+        <form id="review-form" action="{{ url_for('book', isbn=book.isbn) }}" method="post">
+            <input id="review-text-field" type="text", name="review">
+            <input id="review-submit-button" type="Submit" value="Post Review">
+        </form>
+    </div>
+    <div id="review-table">
+        {% if reviews|length > 0 %}
+            <table class="review-info">
+                <tr>
+                    <th>Username</th>
+                    <th>Review</th>
+                </tr>
+                {% for review in reviews %}
+                <tr>
+                    <td>{{ review.username }}</td>
+                    <td>{{ review.review }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>This book has no reviews.</p>
+        {% endif %}
     </div>
 </body>

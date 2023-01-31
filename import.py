@@ -24,8 +24,7 @@ def main():
 
     CREATE TABLE users (
         username VARCHAR PRIMARY KEY,
-        password VARCHAR NOT NULL,
-        name VARCHAR NOT NULL
+        password VARCHAR NOT NULL
     );
 
     CREATE TABLE reviews (
@@ -44,7 +43,7 @@ def main():
         next(reader)
         for isbn, title, author, year in reader:
             db.execute(text('INSERT INTO books (isbn, title, author, year) VALUES (:isbn, :title, :author, :year)'),
-             {'isbn': isbn, 'title': title, 'author': author, 'year': int(year)})
+                {'isbn': isbn, 'title': title, 'author': author, 'year': int(year)})
         db.commit()
 
 if __name__ == '__main__':

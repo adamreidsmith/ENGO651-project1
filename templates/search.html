@@ -4,6 +4,9 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
 </head>
 <body>
+    <div class="header">
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
     <div id="search-bar-container">
         <form id="search-form" action="{{ url_for('search') }}" method="post">
             <input id="search-bar" type="text" name="query" placeholder="Search for a book, author, or isbn...">
@@ -11,7 +14,6 @@
             <input id="search-button" type="Submit" value="Search">
         </form>
     </div>
-
     <div id="search-results-container">
         {% if results is not none %}
             <div>

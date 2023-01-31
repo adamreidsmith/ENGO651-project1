@@ -31,6 +31,10 @@ def index():
 @app.route('/search', methods=['POST', 'GET'])
 def search():
 
+    if session.get('current_user') is None:
+        pass
+        # Link back to login page
+
     if request.method == 'GET':
         return render_template('search.html', results=None)
     
@@ -54,11 +58,31 @@ def search():
 
 
 # The book page
-@app.route('/book/<string:isbn>')
+@app.route('/book/<string:isbn>', methods=['GET', 'POST'])
 def book(isbn):
 
+    if session.get('current_user') is None:
+        pass
+        # Link back to login page
+
+    if request.method == 'POST':
+        # If a post request is sent, add the posted review to the reviews table in the database
+        review = request.form.get('review')
+        if review != '':
+            db.execute(text('INSERT INTO reviews (review, username, book_isbn) VALUES (:review, :user, :isbn)'),
+                {'review': review, 'user': session['current_user'], 'isbn': isbn})
+
     # Get the book corresponding to the isbn
-    book = db.execute(text(f"SELECT * FROM books WHERE isbn = '{isbn}'")).fetchone()
+    book = db.execute(text(f"SELECT * FROM books WHERE isbn = '{isbn}';")).fetchone()
+
+    # Get all current review information for the book
+    reviews = db.execute(text(f"SELECT review, username FROM reviews WHERE reviews.book_isbn = '{isbn}';")).fetchall()
 
     # Render the book page
-    return render_template('book.html', book=book)
+    return render_template('book.html', book=book, reviews=reviews)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('current_user')
+    # Link back to main page
