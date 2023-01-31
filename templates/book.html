@@ -31,7 +31,7 @@
     </div>
     <div id="review-input">
         <form id="review-form" action="{{ url_for('book', isbn=book.isbn) }}" method="post">
-            <input id="review-text-field" type="text", name="review">
+            <input id="review-text-field" type="text", name="review", placeholder="Add a review...">
             <input id="review-submit-button" type="Submit" value="Post Review">
         </form>
     </div>
@@ -43,10 +43,10 @@
                     <th>Review</th>
                 </tr>
                 {% for review in reviews %}
-                <tr>
-                    <td>{{ review.username }}</td>
-                    <td>{{ review.review }}</td>
-                </tr>
+                    <tr>
+                        <td>{{ review.username }}</td>
+                        <td>{{ review.review }}</td>
+                    </tr>
                 {% endfor %}
             </table>
         {% else %}

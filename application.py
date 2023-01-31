@@ -24,7 +24,73 @@ db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/")
 def index():
-    return "Project 1: TODO"
+    return render_template("main.html")
+
+
+@app.route("/signin", methods=["GET"])
+def sign_in():
+    return render_template("sign_in.html")
+
+
+@app.route("/signup", methods=["GET"])
+def sign_up():
+    return render_template("sign_up.html")
+
+
+@app.route("/login", methods=["POST"])
+def log_in():
+    #get text from input
+    username = request.form.get("username")
+    password = request.form.get("password")
+    password2 = request.form.get("password2")
+
+    #case1: check whether username exists
+    username_check = db.execute(text(f"SELECT * FROM users WHERE username='{username}'")).fetchall()
+
+    if len(username_check) == 0:
+        #button should link to sign-up page *
+        return render_template('error.html', message= "No this user.", button="Sign Up", url='signup')
+    
+    #case2: wrong password
+    password_check = db.execute(text(f"SELECT * FROM users WHERE username='{username}' AND password='{password}'")).fetchall()
+    if len(password_check) == 0:
+        #button should link to sign-in page *
+        return render_template('error.html', message="Wrong Password.", button="Sign In Again", url='signin')
+
+    #store current user
+    if request.method=="POST":
+        session["current_user"] = username
+    
+    return render_template('success.html')
+
+
+@app.route("/login_new", methods=["POST"])
+def log_in_new():
+    #get text from input
+    username = request.form.get("username")
+    password = request.form.get("password")
+    password2 = request.form.get("password2")
+
+    #case1: check whether username exists
+    username_check = db.execute(text(f"SELECT * FROM users WHERE username='{username}'")).fetchall()
+    if len(username_check) != 0:
+        #button should link to sign-up page *
+        return render_template('error.html', message= 'Repeated username.', button="Sign Up Again", url='signup')
+    
+    #case2: not matched password
+    if password != password2:
+        #button should link to sign-in page *
+        return render_template('error.html', message="Password are not matched.", button="Sign Up Again", url='signup')
+    
+    db.execute(text('INSERT INTO users (username, password) VALUES (:username, :password)'),
+                {'username': username, 'password': password})
+    db.commit()
+
+    #store current user
+    if request.method=="POST":
+        session["current_user"] = username
+    
+    return render_template('success.html')
 
 
 # The search page
@@ -32,8 +98,7 @@ def index():
 def search():
 
     if session.get('current_user') is None:
-        #return render_template('main.html')
-        pass
+        return render_template('main.html')
 
     if request.method == 'GET':
         return render_template('search.html', results=None)
@@ -62,8 +127,7 @@ def search():
 def book(isbn):
 
     if session.get('current_user') is None:
-        #return render_template('main.html')
-        pass
+        return render_template('main.html')
 
     if request.method == 'POST':
         # If a post request is sent, add the posted review to the reviews table in the database

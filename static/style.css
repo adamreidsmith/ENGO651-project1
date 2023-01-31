@@ -76,8 +76,23 @@ li {
     margin: 0 auto;
     text-align: left;
     font-size: 16pt;
+    margin-bottom: 30px;
 }
 
 #book-info-container table tr {
     height: 40px;
+}
+
+#book-info-container table td {
+    padding: 10px;
+}
+
+#review-input {
+    width: 100%;
+    display: table;
+}
+
+#review-input form {
+    display: table-cell;
+    text-align: center;
 }
