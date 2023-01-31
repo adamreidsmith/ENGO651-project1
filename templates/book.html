@@ -5,15 +5,16 @@
 </head>
 <body>
     <div class="header">
-        <a href="{{ url_for('search') }}">Back</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
+        <div class="header_left">
+            <a href="{{ url_for('search') }}">Back</a>
+        </div>
+        <div class="header_right">
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
     </div>
     <div id="book-info-container">
+        <h1>{{ book.title }}</h1>
         <table class="book-info">
-            <tr>
-                <td>Title:</td>
-                <td>{{ book.title }}</td>
-            </tr>
             <tr>
                 <td>Author:</td>
                 <td>{{ book.author }}</td>

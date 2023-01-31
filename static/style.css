@@ -3,6 +3,33 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+/* Style the header */
+.header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+}
+
+.header_left {
+    width: 50%;
+    padding: 10px;
+}
+
+.header_right {
+    width: 50%;
+    text-align: right;
+    padding: 10px;
+}
+
+.header a {
+    text-decoration: none;
+    background-color: rgb(103, 192, 233);
+    color: white;
+    border-radius: 3px;
+    padding: 8px;
+    font-size: 16pt; 
+}
+
 /* Style search bar and its container */
 #search-bar-container {
     width: 100%;
@@ -36,4 +63,21 @@
 
 li {
     list-style: none;
+}
+
+/* Style the book page */
+#book-info-container {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+#book-info-container table {
+    margin: 0 auto;
+    text-align: left;
+    font-size: 16pt;
+}
+
+#book-info-container table tr {
+    height: 40px;
 }

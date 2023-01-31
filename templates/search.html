@@ -5,7 +5,10 @@
 </head>
 <body>
     <div class="header">
-        <a href="{{ url_for('logout') }}">Logout</a>
+        <div class="header_left"></div>
+        <div class="header_right">
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
     </div>
     <div id="search-bar-container">
         <form id="search-form" action="{{ url_for('search') }}" method="post">

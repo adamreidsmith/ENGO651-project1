@@ -32,8 +32,8 @@ def index():
 def search():
 
     if session.get('current_user') is None:
+        #return render_template('main.html')
         pass
-        # Link back to login page
 
     if request.method == 'GET':
         return render_template('search.html', results=None)
@@ -62,8 +62,8 @@ def search():
 def book(isbn):
 
     if session.get('current_user') is None:
+        #return render_template('main.html')
         pass
-        # Link back to login page
 
     if request.method == 'POST':
         # If a post request is sent, add the posted review to the reviews table in the database
@@ -85,4 +85,4 @@ def book(isbn):
 @app.route('/logout')
 def logout():
     session.pop('current_user')
-    # Link back to main page
+    return render_template('main.html')
