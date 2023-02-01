@@ -68,7 +68,6 @@ def log_in():
         return render_template('error.html', message="Incorrect password.", button="Sign In Again", url='signin')
 
     # Store current user
-    # if request.method == "POST":
     session["current_user"] = username
     
     return render_template('success.html')
@@ -109,7 +108,6 @@ def log_in_new():
     db.commit()
 
     # Store current user
-    # if request.method=="POST":
     session["current_user"] = username
     
     return render_template('success.html')
