@@ -89,7 +89,7 @@ def log_in_new():
 
     # Case2: check whether data has been entered
     invalid_chars = {"'", '"', ' '}
-    if len(set(username) & invalid_chars) > 0 or len(set(password) & invalid_chars):
+    if set(username) & invalid_chars or set(password) & invalid_chars:
         # Button should link to sign-up page *
         return render_template('error.html', message='Username or password cannot contain spaces or quote characters.', button="Sign Up Again", url='signup')
 
@@ -163,9 +163,9 @@ def book(isbn):
         db.commit()
 
     # Get the book corresponding to the passed in isbn
-    book = db.execute(text(f"SELECT * FROM books WHERE isbn = '{isbn}';")).fetchone()
+    book = db.execute(text(f"SELECT * FROM books WHERE isbn = '{isbn}'")).fetchone()
     # Get all current review information for the book
-    reviews = db.execute(text(f"SELECT review, username FROM reviews WHERE reviews.book_isbn = '{isbn}';")).fetchall()
+    reviews = db.execute(text(f"SELECT review, username FROM reviews WHERE reviews.book_isbn = '{isbn}'")).fetchall()
     db.commit()
 
     # Render the book page
