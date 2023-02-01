@@ -2,7 +2,7 @@
 
 ENGO 651 - Adv. Topics on Geospatial Technologies
 
-By Adam and Nine
+By Adam and Chavisa
 
 ## Description
 
