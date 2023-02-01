@@ -31,7 +31,8 @@
     </div>
     <div id="review-input">
         <form id="review-form" action="{{ url_for('book', isbn=book.isbn) }}" method="post">
-            <input id="review-text-field" type="text", name="review", placeholder="Add a review...">
+            <textarea id="review-text-field" type="text", name="review", placeholder="Add a review..."></textarea>
+            <br/>
             <input id="review-submit-button" type="Submit" value="Post Review">
         </form>
     </div>
