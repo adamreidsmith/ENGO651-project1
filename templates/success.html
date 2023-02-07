@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+Log-in Successful
+{% endblock heading %}
+
+{% block body %}
+
+{{ message }}
+<br/>
+<a href="{{ url_for('search') }}" method="GET"><button>Go to Search Page</button></a>
+
+{% endblock body %}

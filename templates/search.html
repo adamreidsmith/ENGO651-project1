@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <title>Search</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+    <div class="header">
+        <div class="header_left"></div>
+        <div class="header_right">
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+    <div id="search-bar-container">
+        <form id="search-form" action="{{ url_for('search') }}" method="post">
+            <input id="search-bar" type="text" name="query" placeholder="Search for a book, author, or isbn...">
+            <br/>
+            <input id="search-button" type="Submit" value="Search">
+        </form>
+    </div>
+    <div id="search-results-container">
+        {% if results is not none %}
+            <div>
+                <h1>Results</h1>
+            </div>
+            <ul>
+                {% for result in results %}
+                    <li>
+                        <a href="{{ url_for('book', isbn=result.isbn) }}">{{ result.title }}</a>
+                    </li>
+                {% else %}
+                    <li>No results found. Try another search...</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>

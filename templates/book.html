@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<head>
+    <title>{{ book.title }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header_left">
+            <a href="{{ url_for('search') }}">Back</a>
+        </div>
+        <div class="header_right">
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+    <div id="book-info-container">
+        <h1>{{ book.title }}</h1>
+        <table class="book-info">
+            <tr>
+                <td>Author:</td>
+                <td>{{ book.author }}</td>
+            </tr>
+            <tr>
+                <td>Publication Year:</td>
+                <td>{{ book.year }}</td>
+            </tr>
+            <tr>
+                <td>ISBN:</td>
+                <td>{{ book.isbn }}</td>
+            </tr>
+            <tr>
+                <td>User rating:</td>
+                <td>{{ average_rating }} / 5</td>
+            </tr>
+            <tr>
+                <td>User reviews:</td>
+                <td>{{ reviews_count }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="review-input">
+        <form id="review-form" action="{{ url_for('book', isbn=book.isbn) }}" method="post">
+            <div>
+                <span>Rating: </span>
+                <span>
+                    <input type="radio" name="rating" value="1">
+                    <label for="1">1</label>
+                    <input type="radio" name="rating" value="2">
+                    <label for="2">2</label>
+                    <input type="radio" name="rating" value="3">
+                    <label for="3">3</label>
+                    <input type="radio" name="rating" value="4">
+                    <label for="4">4</label>
+                    <input type="radio" name="rating" value="5">
+                    <label for="5">5</label>
+                </span>
+            </div>
+            <textarea id="review-text-field" type="text", name="review", placeholder="Add a review..."></textarea>
+            <br/>
+            <input id="review-submit-button" type="Submit" value="Post Review">
+        </form>
+    </div>
+    <div id="review-table">
+        {% if reviews|length > 0 %}
+            <table class="review-info">
+                <tr>
+                    <th>Username</th>
+                    <th>Rating</th>
+                    <th>Review</th>
+                </tr>
+                {% for review in reviews %}
+                    <tr>
+                        <td>{{ review.username }}</td>
+                        <td>{{ review.rating }}</td>
+                        <td>{{ review.review }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>This book has no reviews.</p>
+        {% endif %}
+    </div>
+</body>

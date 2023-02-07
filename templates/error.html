@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+Error
+{% endblock heading %}
+
+{% block body %}
+
+{{ message }}
+<br/>
+<a  href="{{ url }}" method="GET"><button>{{ button }}</button></a>
+
+{% endblock body %}

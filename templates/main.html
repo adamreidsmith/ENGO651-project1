@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+Bookshelf
+{% endblock heading %}
+
+{% block body %}
+
+<a href="{{ url_for('sign_in') }}" method="GET"><button>Sign In</button></a>
+<a href="{{ url_for('sign_up') }}" method="GET"><button>Sign Up</button></a>
+
+{% endblock body %}
